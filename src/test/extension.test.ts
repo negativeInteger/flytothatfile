@@ -1,15 +1,33 @@
-import * as assert from 'assert';
-
-// You can import and use all API from the 'vscode' module
-// as well as import your extension to test it
 import * as vscode from 'vscode';
-// import * as myExtension from '../../extension';
+import * as path from 'path';
+import * as assert from 'assert';
+import { activate, deactivate } from '../extension';
 
-suite('Extension Test Suite', () => {
-	vscode.window.showInformationMessage('Start all tests.');
+describe('Flyto Extension', () => {
+    let context: vscode.ExtensionContext;
 
-	test('Sample test', () => {
-		assert.strictEqual(-1, [1, 2, 3].indexOf(5));
-		assert.strictEqual(-1, [1, 2, 3].indexOf(0));
-	});
+    before(() => {
+        context = { subscriptions: [] } as unknown as vscode.ExtensionContext;
+        activate(context);
+    });
+
+    after(() => {
+        deactivate();
+    });
+
+    it('should normalize file paths correctly', async () => {
+        const input = 'C:/folder/file.js';
+        const normalized = path.normalize(input);
+        assert.strictEqual(normalized, 'C:\\folder\\file.js');
+    });
+
+    it('should register openFileCommand', () => {
+        const commands = context.subscriptions.map(sub => (sub as vscode.Disposable).dispose);
+        assert.strictEqual(commands.length > 0, true);
+    });
+
+    it('should dispose subscriptions on deactivate', () => {
+        deactivate();
+        assert.strictEqual(context.subscriptions.length, 0);
+    });
 });
