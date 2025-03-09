@@ -13,7 +13,12 @@ const decorationType = vscode.window.createTextEditorDecorationType({
 export function activate(context: vscode.ExtensionContext) {
     // setting extensionContext for deactivate() function
     extensionContext = context;
-    // Matches: 'flyto C:\path\file.js:30'
+    
+    // Matches: 
+    // 'flyto C:\path\file.js:30'  
+    // 'flyto C:\path\file.js'    
+    // 'flyto C:\path\file.ts:30'
+    // 'flyto C:\path\file.ts'
     const regex = /(?<=\/\/\s*flyto\s*)([A-Za-z]:\\[^:]+\.(js|ts|jsx|tsx))(?::(\d+))?/g;
 
     // openFileCommand opens the file 
@@ -25,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
                 vscode.window.showErrorMessage(`File not found: ${filePath}`);
                 return;
             }
-            // Open file in new tab
+            // Open file in a new tab
             const doc = await vscode.workspace.openTextDocument(vscode.Uri.file(filePath));
             const editor = await vscode.window.showTextDocument(doc);
             // Move cursor to the specified line
@@ -78,18 +83,18 @@ export function activate(context: vscode.ExtensionContext) {
         };
         editor.setDecorations(decorationType, decorations);
     };
-    // Update decorations when switching editors (Switching between tabs, Typing, Opening new files)
+    // Update decorations when switching editors
     vscode.window.onDidChangeActiveTextEditor(editor => {
         if (editor) {
             triggerUpdate(editor);
-        }
+        };
     }, null, context.subscriptions);
-    
+    // Update decorations when switching tabs
     vscode.workspace.onDidChangeTextDocument(event => {
         const editor = vscode.window.activeTextEditor;
         if (editor && event.document === editor.document) {
             triggerUpdate(editor);
-        }
+        };
     }, null, context.subscriptions);
     // Initial trigger when extension starts
     const editor = vscode.window.activeTextEditor;
@@ -99,7 +104,7 @@ export function activate(context: vscode.ExtensionContext) {
 };
 
 export function deactivate() {
-    console.log('[Flyto] Cleaning up...');
+    console.log('flyto Cleaning up...');
     decorationType.dispose();
     if(extensionContext) {
         extensionContext.subscriptions.forEach(sub =>  sub.dispose());

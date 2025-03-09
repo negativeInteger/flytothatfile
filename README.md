@@ -1,71 +1,61 @@
-# flytothatfile README
+# flytothatfile
 
-This is the README for your extension "flytothatfile". After writing up a brief description, we recommend including the following sections.
+🚀 **flytothatfile** is a VS Code extension that lets you quickly navigate between files by clicking special comments in your code.
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+✨ Click on `// flyto C:\path\file.js:30` comments to instantly open the specified file at the given line number.
+✨ Supports JavaScript and TypeScript files.
+✨ Adds text decorations (highlights) to `flyto` comments for better visibility.
+✨ CodeLens support to display clickable ✈️ icons.
 
-For example if there is an image subfolder under your extension project workspace:
+## Installation
 
-\!\[feature X\]\(images/feature-x.png\)
+1. Install **flytothatfile** from the VS Code Marketplace.
+2. Restart VS Code if needed.
+3. Start using `// flyto C:\your\file.js:lineNumber` comments to navigate easily!
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Usage
+
+1. Add a comment in your JavaScript or TypeScript file like this:
+   ```js
+   // flyto C:\Users\example\project\file.js:25
+   ```
+2. Click on the highlighted comment or ✈️ icon.
+3. The file will open at the specified line number.
 
 ## Requirements
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+- Visual Studio Code v1.97.0 or later.
+- Works on Windows (support for other OSes planned in future updates).
 
 ## Extension Settings
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+This extension currently has no configurable settings, but future versions may include customization options.
 
 ## Known Issues
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+- If a file is already open, clicking a `flyto` comment resets the cursor to the specified line instead of keeping it at the current position. (Planned fix in future update.)
 
 ## Release Notes
 
-Users appreciate release notes as you update your extension.
+### v0.0.1
+- Initial release with basic functionality.
+- Supports JavaScript and TypeScript.
+- Clickable `flyto` comments and CodeLens icons.
+- Opens files at the specified line number.
 
-### 1.0.0
+## Contributing
 
-Initial release of ...
+Want to improve **flytothatfile**? Feel free to contribute!
 
-### 1.0.1
+1. Fork the [GitHub repository](https://github.com/negativeInteger/flytothatfile).
+2. Create a feature branch.
+3. Submit a pull request.
 
-Fixed issue #.
+## License
 
-### 1.1.0
+MIT License - Free to use and modify.
 
-Added features X, Y, and Z.
+**Enjoy coding with flytothatfile! ✈️**
 
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
