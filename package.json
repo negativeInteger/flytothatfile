@@ -4,6 +4,7 @@
   "description": "fly between files with one click",
   "publisher": "negativeInteger",
   "version": "0.0.1",
+  "icon": "icon.jpg",
   "engines": {
     "vscode": "^1.97.0"
   },
